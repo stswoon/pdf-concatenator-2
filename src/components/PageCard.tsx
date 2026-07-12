@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { usePageThumbnail } from '@/hooks/usePageThumbnail'
 import { cn } from '@/lib/utils'
@@ -10,6 +12,7 @@ type PageCardProps = {
   isDragging?: boolean
   isDropTarget?: boolean
   onRemove: (id: string) => void
+  onPreview: (id: string) => void
   onDragStart: (event: React.DragEvent<HTMLElement>, index: number) => void
   onDragOver: (event: React.DragEvent<HTMLElement>, index: number) => void
   onDrop: (event: React.DragEvent<HTMLElement>, index: number) => void
@@ -37,27 +40,60 @@ function PageCard({
   isDragging = false,
   isDropTarget = false,
   onRemove,
+  onPreview,
   onDragStart,
   onDragOver,
   onDrop,
   onDragEnd,
 }: PageCardProps) {
   const { url, loading, isPdfNative } = usePageThumbnail(page, sources)
+  const wasDraggedRef = useRef(false)
+
+  const handleDragStart = (event: React.DragEvent<HTMLElement>) => {
+    wasDraggedRef.current = true
+    onDragStart(event, index)
+  }
+
+  const handleDragEnd = () => {
+    onDragEnd()
+    window.setTimeout(() => {
+      wasDraggedRef.current = false
+    }, 0)
+  }
+
+  const handlePreview = () => {
+    if (wasDraggedRef.current) {
+      return
+    }
+    onPreview(page.id)
+  }
 
   return (
     <article
       draggable
-      onDragStart={(event) => onDragStart(event, index)}
+      onDragStart={handleDragStart}
       onDragOver={(event) => onDragOver(event, index)}
       onDrop={(event) => onDrop(event, index)}
-      onDragEnd={onDragEnd}
+      onDragEnd={handleDragEnd}
       className={cn(
         'group relative flex flex-col overflow-hidden rounded-lg border bg-card shadow-sm transition-opacity',
         isDragging && 'opacity-50',
         isDropTarget && 'ring-2 ring-primary ring-offset-2',
       )}
     >
-      <div className="relative aspect-[3/4] w-full bg-muted">
+      <div
+        className="relative aspect-[3/4] w-full cursor-zoom-in bg-muted"
+        onClick={handlePreview}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            handlePreview()
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label={`Preview ${getPageLabel(page)}`}
+      >
         {loading ? (
           <div className="absolute inset-0 animate-pulse bg-muted" />
         ) : url ? (
@@ -84,7 +120,10 @@ function PageCard({
           size="icon-xs"
           className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100"
           aria-label={`Remove ${getPageLabel(page)}`}
-          onClick={() => onRemove(page.id)}
+          onClick={(event) => {
+            event.stopPropagation()
+            onRemove(page.id)
+          }}
         >
           ×
         </Button>

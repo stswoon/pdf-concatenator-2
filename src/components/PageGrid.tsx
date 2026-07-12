@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import PageCard from '@/components/PageCard'
+import PagePreviewModal from '@/components/PagePreviewModal'
 import { usePdfWorkspaceStore } from '@/store/usePdfWorkspaceStore'
 
 const SKELETON_COUNT = 4
@@ -14,6 +15,11 @@ function PageGrid() {
 
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [dropIndex, setDropIndex] = useState<number | null>(null)
+  const [previewPageId, setPreviewPageId] = useState<string | null>(null)
+
+  const previewPage = previewPageId
+    ? pages.find((page) => page.id === previewPageId) ?? null
+    : null
 
   const handleDragStart = useCallback((event: React.DragEvent<HTMLElement>, index: number) => {
     setDragIndex(index)
@@ -46,6 +52,10 @@ function PageGrid() {
   const handleDragEnd = useCallback(() => {
     setDragIndex(null)
     setDropIndex(null)
+  }, [])
+
+  const handleClosePreview = useCallback(() => {
+    setPreviewPageId(null)
   }, [])
 
   if (status === 'loading') {
@@ -81,6 +91,7 @@ function PageGrid() {
             isDragging={dragIndex === index}
             isDropTarget={dropIndex === index && dragIndex !== index}
             onRemove={removePage}
+            onPreview={setPreviewPageId}
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
@@ -88,6 +99,14 @@ function PageGrid() {
           />
         ))}
       </div>
+
+      {previewPage && (
+        <PagePreviewModal
+          page={previewPage}
+          sources={sources}
+          onClose={handleClosePreview}
+        />
+      )}
     </section>
   )
 }
