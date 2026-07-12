@@ -13,6 +13,19 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          const originalName = assetInfo.names?.[0] ?? assetInfo.name ?? ''
+          if (originalName.includes('pdf.worker')) {
+            return 'assets/pdf.worker.min-[hash].js'
+          }
+          return 'assets/[name]-[hash][extname]'
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

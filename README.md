@@ -84,3 +84,25 @@ Sunny day сценарий:
 ---
 
 в превью виде после d&d тоже должно выглядеть как страница, по аналогии с попапом
+
+## Чат 6
+
+При запуске в докере падает
+```
+Failed to load module script: The server responded with a non-JavaScript MIME type of "application/octet-stream". Strict MIME type checking is enforced for module scripts per HTML spec.
+pdf.worker.min-DEtVeC4l.mjs:1 
+
+Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of "application/octet-stream". Strict MIME type checking is enforced for module scripts per HTML spec.
+```
+
+Агент ответил:
+> ...
+> Исправление: добавлен nginx-default.conf с правильным MIME-типом и подключён в Dockerfile.
+> types {
+>    application/javascript  mjs;
+> }
+> ...
+
+---
+
+нет лучше переделай чтобы вместо mjs грузился js

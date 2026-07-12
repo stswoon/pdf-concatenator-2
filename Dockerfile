@@ -9,7 +9,7 @@ COPY index.html tsconfig.app.json tsconfig.json tsconfig.node.json vite.config.t
 RUN npm run build
 
 FROM nginx:1.27.3
-COPY --from=builder /app/dist ./usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 COPY start.sh /etc/nginx/
 RUN chmod +x /etc/nginx/start.sh
 ARG NGINX_PORT
