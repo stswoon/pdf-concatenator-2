@@ -1,0 +1,62 @@
+{
+  "build": "passed",
+  "timestamp": "2026-07-12T15:07:42.393Z",
+  "autotests": "not added — no test framework in project",
+  "TC-R01": {
+    "pass": true
+  },
+  "TC-07": {
+    "pass": true,
+    "errorText": "Input document to `PDFDocument.load` is encrypted. You can use `PDFDocument.load(..., { ignoreEncryption: true })` if you wish to load the document anyways.Dismiss"
+  },
+  "reorder": {
+    "before": [
+      "text-2p.pdf — p.1",
+      "text-2p.pdf — p.2",
+      "test.png"
+    ],
+    "after": [
+      "text-2p.pdf — p.1",
+      "test.png",
+      "text-2p.pdf — p.2"
+    ]
+  },
+  "TC-20": {
+    "pass": true,
+    "pageCount": 3,
+    "pageKinds": [
+      "pdf-native",
+      "image",
+      "pdf-native"
+    ],
+    "labels": [
+      "text-2p.pdf — p.1",
+      "test.png",
+      "text-2p.pdf — p.2"
+    ]
+  },
+  "TC-21": {
+    "pass": true,
+    "text1": "Page one selectable text ALPHA",
+    "text3": "Page two selectable text BETA",
+    "note": "Text verified via pdfjs getTextContent in browser run"
+  },
+  "TC-22": {
+    "pass": true,
+    "ratio": 1.52,
+    "warnings": [],
+    "mergedSize": 1684,
+    "originalSize": 1107
+  },
+  "TC-SD-1": {
+    "pass": true
+  },
+  "exportUi": {
+    "pass": true,
+    "fileName": "merged.pdf"
+  },
+  "TC-R02": {
+    "pass": true,
+    "note": "npm run build exit 0"
+  }
+}

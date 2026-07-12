@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-07-12T15:09:48.770Z",
+  "SD-2": {
+    "pass": true,
+    "mode": "zip",
+    "fileName": "pages.png.zip",
+    "zipSize": 239667,
+    "isZip": true,
+    "zipNames": [
+      "3page-p1.png",
+      "3page-p2.png",
+      "3page-p3.png"
+    ],
+    "namingDeviation": true
+  },
+  "SD-3": {
+    "pass": false,
+    "beforeCompress": [
+      759,
+      759,
+      759
+    ],
+    "afterCompress": [
+      759,
+      759,
+      759
+    ],
+    "qualities": [
+      0.7,
+      0.7,
+      0.7
+    ],
+    "pageCount": 3,
+    "pdfSize": 3889,
+    "dims": [
+      {
+        "w": 1,
+        "h": 1,
+        "quality": 0.7
+      },
+      {
+        "w": 1,
+        "h": 1,
+        "quality": 0.7
+      },
+      {
+        "w": 1,
+        "h": 1,
+        "quality": 0.7
+      }
+    ]
+  },
+  "requirements": {
+    "splitPdf": true,
+    "mergePdfs": true,
+    "mergeImages": true,
+    "compressImages": false,
+    "dragDropReorder": true,
+    "textPreserved": true
+  }
+}
