@@ -4,6 +4,7 @@ import CompressPanel from '@/components/CompressPanel'
 import DropZone from '@/components/DropZone'
 import ExportActions from '@/components/ExportActions'
 import PageGrid from '@/components/PageGrid'
+import SeoIntro from '@/components/SeoIntro'
 import { Button } from '@/components/ui/button'
 import { usePdfWorkspaceStore } from '@/store/usePdfWorkspaceStore'
 
@@ -39,7 +40,10 @@ function App() {
     <div className="min-h-svh bg-background">
       <header className="border-b">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
-          <h1 className="text-xl font-semibold tracking-tight">PDF Concatenator</h1>
+          <div className="flex items-baseline gap-2">
+            <h1 className="text-xl font-semibold tracking-tight">PDF Concatenator</h1>
+            <span className="text-xs text-muted-foreground">v{__APP_VERSION__}</span>
+          </div>
           <div className="flex gap-2">
             <input
               ref={inputRef}
@@ -67,6 +71,7 @@ function App() {
 
       <main className="mx-auto max-w-6xl space-y-6 px-4 py-6 sm:px-6">
         <DropZone />
+        {!hasPages && <SeoIntro />}
         <PageGrid />
         {hasPages && (
           <>
