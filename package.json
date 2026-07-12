@@ -1,11 +1,11 @@
 {
   "name": "test-ai",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "check": "npm run typecheck && npm run build",
