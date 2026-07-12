@@ -1,0 +1,15 @@
+{
+  "mcpAllowlist": [
+    "user-basic-memory:write_note",
+    "user-basic-memory:edit_note",
+    "user-basic-memory:search",
+    "user-basic-memory:search_notes",
+    "user-basic-memory:read_note",
+    "user-basic-memory:build_context"
+  ],
+  "autoRun": {
+    "allow_instructions": [
+      "Memory MCP write_note and edit_note calls are authorized when memory.mdc rules require saving session summaries to Trash."
+    ]
+  }
+}

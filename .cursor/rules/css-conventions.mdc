@@ -1,0 +1,33 @@
+---
+description: Соглашения по CSS
+globs: src/**/*.css
+alwaysApply: false
+---
+
+# CSS
+
+## Где писать стили
+
+- **Глобальное** — только в `index.css`: reset, CSS-переменные, базовая типографика.
+- **Компонентное** — colocate рядом с компонентом: `Button.css` ↔ `Button.tsx`.
+
+## Именование
+
+- Классы в kebab-case: `.todo-list`, `.app-header`.
+- Корневой класс совпадает с компонентом: `App` → `.app`, `TodoList` → `.todo-list`.
+
+## Переменные
+
+```css
+/* ✅ в :root */
+:root {
+  --color-text: #1a1a1a;
+  --space-md: 1rem;
+}
+
+/* ❌ magic numbers без переменных для повторяющихся значений */
+```
+
+## Inline-стили
+
+Не используй `style={{ ... }}`, кроме динамических значений (позиция, размер из props).

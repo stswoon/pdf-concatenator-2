@@ -1,0 +1,41 @@
+---
+description: Паттерны React-компонентов
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# React-компоненты
+
+- Только функциональные компоненты и хуки.
+- Не импортируй `React` ради JSX — достаточно именованных импортов хуков.
+- Стили — через `className`, не `class`.
+- Корневой компонент — `App.tsx`; точка монтирования — `main.tsx`.
+
+## Стиль (как в проекте)
+
+```tsx
+// ✅
+import { useState } from 'react'
+
+function MyComponent() {
+  return (
+    <section className="my-component">
+      <h2>Title</h2>
+    </section>
+  )
+}
+
+export default MyComponent
+```
+
+```tsx
+// ❌ default import React
+import React from 'react'
+```
+
+## Организация
+
+- `export default` для компонентов страниц и виджетов.
+- Props описывай через `type`, не `interface`.
+- Логику длиннее ~15 строк выноси в custom hook (`use*.ts`) в том же файле или рядом.
+- Стили компонента colocate: `Button.tsx` + `Button.css`.

@@ -1,0 +1,30 @@
+---
+description: TypeScript strict-конвенции
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript
+
+Проект в `strict` режиме: `noUnusedLocals`, `noUnusedParameters`, `verbatimModuleSyntax`.
+
+## Импорты
+
+```ts
+// ✅ type-only импорт
+import type { User } from './types'
+
+// ❌ смешанный импорт типа как значения
+import { User } from './types'
+```
+
+## Типизация
+
+- Не используй `any`; для неизвестного — `unknown` + сужение типа.
+- Не оставляй неиспользуемые импорты, переменные и параметры.
+- Публичные типы держи рядом с модулем; отдельную папку `types/` не создавай, пока проект маленький.
+
+## Стиль
+
+- Одинарные кавычки в импортах.
+- Без точек с запятой в конце строк.

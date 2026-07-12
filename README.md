@@ -1,1 +1,1 @@
-# pdf-concatenator-2
+# PDF-concatenator v2 (ai generated)
